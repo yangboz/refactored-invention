@@ -9,6 +9,7 @@ As a proof-of-concept for a web3 mediawiki, one could create a simple dApp that 
 Overall, a web3 mediawiki has the potential to revolutionize the way online encyclopedias are created and maintained by leveraging the power of decentralized technology. However, more research and development is needed to fully realize the potential of this concept.
 
 
+
 ## AI-film
 
 A proof-of-concept for an AI film would involve creating a short, experimental film that incorporates artificial intelligence (AI) technology in some way. This could involve using AI algorithms to generate or manipulate visual or audio elements of the film, or incorporating AI-powered characters or storylines into the film.
@@ -18,3 +19,15 @@ One possible approach to creating a proof-of-concept AI film would be to use AI 
 Alternatively, the proof-of-concept AI film could be a more narrative-driven work, incorporating AI-powered characters and storylines. For example, the film could feature a protagonist who is accompanied by an AI companion, and their interactions and decisions could be influenced by the AI's algorithms and data inputs.
 
 Overall, a proof-of-concept AI film would showcase the potential of AI technology to enhance and transform the art of filmmaking, and could inspire further exploration and experimentation in this field.
+
+### AI-Storybook
+
+A proof-of-concept for an AI storybook would involve creating a simple digital storybook that incorporates artificial intelligence (AI) technology in some way. This could involve using AI algorithms to generate or manipulate the text and illustrations of the storybook, or incorporating interactive elements that are powered by AI.
+
+One possible approach to creating a proof-of-concept AI storybook would be to use AI algorithms to generate a series of simple, illustrated stories based on a set of predetermined themes and characters. The AI could be trained on a dataset of existing children's stories, and could be used to generate new, unique stories that are appropriate for young readers.
+
+Alternatively, the proof-of-concept AI storybook could incorporate interactive elements that are powered by AI. For example, the storybook could include a chatbot character who can answer questions and engage in simple conversations with the reader, or it could feature interactive puzzles and games that are generated or adapted by the AI based on the reader's progress and interests.
+
+Overall, a proof-of-concept AI storybook would showcase the potential of AI technology to enhance and enrich the traditional storybook format, and could inspire further exploration and experimentation in this field.
+
+
