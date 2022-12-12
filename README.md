@@ -9,7 +9,7 @@ As a proof-of-concept for a web3 mediawiki, one could create a simple dApp that 
 Overall, a web3 mediawiki has the potential to revolutionize the way online encyclopedias are created and maintained by leveraging the power of decentralized technology. However, more research and development is needed to fully realize the potential of this concept.
 
 
-##AI-film
+## AI-film
 
 A proof-of-concept for an AI film would involve creating a short, experimental film that incorporates artificial intelligence (AI) technology in some way. This could involve using AI algorithms to generate or manipulate visual or audio elements of the film, or incorporating AI-powered characters or storylines into the film.
 
