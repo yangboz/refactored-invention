@@ -1,52 +1,103 @@
-To create a Tic Tac Toe game using Python as a backend and ReactJS as a frontend, you will need to follow these steps:
+To create a Tic Tac Toe web game using Python as a backend and ReactJS as a frontend, you will need to follow the steps below:
 
-Set up a development environment: Install Python and ReactJS on your machine. You can use any code editor or IDE of your choice.
-Create the backend: Start by creating a Python Flask server to handle the game's logic. You will need to create routes to handle game initialization, player moves, and game status checks.
-Create the frontend: Use ReactJS to create a user interface for the game. You can use any styling library of your choice, such as Bootstrap or MaterialUI, to make the game look more appealing.
-Connect the backend and frontend: Use Axios to make HTTP requests from the frontend to the backend to update the game state.
-Test the game: Make sure that the game works as expected by playing it yourself and testing it with other people.
-Here is an example code for creating the Tic Tac Toe game using Python and ReactJS:
+Step 1: Set up the backend server using Python Flask
+
+Install Python and Flask on your computer
+Create a new Flask project using the command line
+Create a new route in the Flask app that returns the current state of the game
+Step 2: Set up the frontend using ReactJS
+
+Install Node.js and create-react-app on your computer
+Create a new ReactJS project using the command line
+Create a new component in the ReactJS app that displays the game board and allows the user to make moves
+Step 3: Connect the frontend and backend
+
+Use Axios to make requests to the Flask app from the ReactJS app
+Update the game board in the ReactJS app when the server sends back the current state of the game
+Step 4: Implement the Tic Tac Toe game logic
+
+Create a Python class that represents the Tic Tac Toe game
+Implement the logic for checking for a winner or a tie
+Update the Flask app to use the game class to keep track of the current state of the game
+Step 5: Test and Deploy
+
+Test the game locally to ensure everything is working properly
+Deploy the game to a hosting platform like Heroku or AWS to make it available to the public
+Here's a simple implementation of Tic Tac Toe web game using the above technologies.
 
 Backend (Python Flask):
 
 python
 Copy code
-from flask import Flask, jsonify, request
-import random
+from flask import Flask, request, jsonify
+from game import Game
 
 app = Flask(__name__)
+game = Game()
 
-games = {}
+@app.route('/game', methods=['GET'])
+def get_game_state():
+    return jsonify(game.get_state())
 
-# Route to initialize a new game
 @app.route('/game', methods=['POST'])
-def new_game():
-    game_id = random.randint(1, 1000)
-    games[game_id] = {'board': [' ']*9, 'player': 'X'}
-    return jsonify({'game_id': game_id})
+def make_move():
+    data = request.get_json()
+    player = data['player']
+    row = data['row']
+    col = data['col']
+    game.make_move(player, row, col)
+    return jsonify(game.get_state())
 
-# Route to make a move
-@app.route('/game/<int:game_id>/move', methods=['POST'])
-def make_move(game_id):
-    game = games[game_id]
-    board = game['board']
-    player = game['player']
-    move = request.json['move']
+if __name__ == '__main__':
+    app.run(debug=True)
+Frontend (ReactJS):
 
-    if board[move] != ' ':
-        return jsonify({'message': 'Invalid move'})
+javascript
+Copy code
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-    board[move] = player
-    game['player'] = 'O' if player == 'X' else 'X'
+function App() {
+  const [board, setBoard] = useState([
+    ['', '', ''],
+    ['', '', ''],
+    ['', '', '']
+  ]);
+  const [player, setPlayer] = useState('X');
+  const [winner, setWinner] = useState(null);
 
-    winner = check_winner(board)
-    if winner:
-        return jsonify({'message': f'{winner} wins!'})
-    elif ' ' not in board:
-        return jsonify({'message': 'Tie game'})
+  useEffect(() => {
+    fetchGameState();
+  }, []);
 
-    return jsonify({'board': board, 'player': game['player']})
+  const fetchGameState = async () => {
+    const response = await axios.get('/game');
+    setBoard(response.data.board);
+    setPlayer(response.data.player);
+    setWinner(response.data.winner);
+  };
 
-# Function to check for a winner
-def check_winner(board):
-    win_positions = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], 
+  const makeMove = async (row, col) => {
+    if (board[row][col] === '' && !winner) {
+      const response = await axios.post('/game', { player, row, col });
+      setBoard(response.data.board);
+      setPlayer(response.data.player);
+      setWinner(response.data.winner);
+    }
+  };
+
+  const resetGame = async () => {
+    await axios.post('/game/reset');
+    fetchGameState();
+  };
+
+  return (
+    <div>
+      <h1>Tic Tac Toe</h1>
+      {winner ? <h2>Winner: {winner}</h2> : <h2>Current Player: {player}</h2>}
+      <table>
+        <tbody>
+          {board.map((row, rowIndex) => (
+            <tr key={rowIndex}>
+              {row.map((cell, colIndex) => (
+                <td key={`${rowIndex}-${colIndex}`} onClick={() => makeMove
